@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - AutoRentalBase@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="autorentalbase">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="book_shop"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sys"/>
+    <schema id="8" parent="1" name="fridge"/>
+    <table id="9" parent="2" name="bills"/>
+    <table id="10" parent="2" name="bills_has_services"/>
+    <table id="11" parent="2" name="brands"/>
+    <table id="12" parent="2" name="cars"/>
+    <table id="13" parent="2" name="clients"/>
+    <table id="14" parent="2" name="discounts"/>
+    <table id="15" parent="2" name="maintenances"/>
+    <table id="16" parent="2" name="orders"/>
+    <table id="17" parent="2" name="services"/>
+    <table id="18" parent="2" name="staff"/>
+    <table id="19" parent="2" name="users"/>
+    <routine id="20" parent="2" name="cost_bill">
+      <RoutineKind>procedure</RoutineKind>
+    </routine>
+    <column id="21" parent="9" name="bill_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="22" parent="9" name="bill_code">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="23" parent="9" name="bill_cost">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="9" name="bill_order">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="9" name="bill_discount">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="26" parent="9" name="fk_bill_Discounts1_idx">
+      <ColNames>bill_discount</ColNames>
+    </index>
+    <index id="27" parent="9" name="fk_bills_orders1_idx">
+      <ColNames>bill_order</ColNames>
+    </index>
+    <key id="28" parent="9" name="PRIMARY">
+      <ColNames>bill_id
+bill_discount
+bill_order</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="29" parent="9" name="fk_bill_Discounts1">
+      <ColNames>bill_discount</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>discounts</RefTableName>
+      <RefColNames>discount_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <foreign-key id="30" parent="9" name="fk_bills_orders1">
+      <ColNames>bill_order</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>orders</RefTableName>
+      <RefColNames>order_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="31" parent="10" name="bill_service">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="32" parent="10" name="service_bill">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="33" parent="10" name="fk_Services_has_Bills_Bills1_idx">
+      <ColNames>service_bill</ColNames>
+    </index>
+    <index id="34" parent="10" name="fk_Services_has_Bills_Services1_idx">
+      <ColNames>bill_service</ColNames>
+    </index>
+    <key id="35" parent="10" name="PRIMARY">
+      <ColNames>bill_service
+service_bill</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="36" parent="10" name="fk_Services_has_Bills_Services1">
+      <ColNames>bill_service</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>services</RefTableName>
+      <RefColNames>service_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <foreign-key id="37" parent="10" name="fk_Services_has_Bills_Bills1">
+      <ColNames>service_bill</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>bills</RefTableName>
+      <RefColNames>bill_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <trigger id="38" parent="10" name="bills_has_services_AFTER_INSERT">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <trigger id="39" parent="10" name="bills_has_services_AFTER_UPDATE">
+      <Turn>after-row</Turn>
+      <Events>U</Events>
+    </trigger>
+    <column id="40" parent="11" name="brand_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="11" name="brand_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="11" name="brand_class">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="11" name="brand_number_of_seats">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="11" name="brand_issue_year">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="11" name="brand_engine">
+      <Position>7</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="11" name="brand_tariff">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="47" parent="11" name="PRIMARY">
+      <ColNames>brand_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="48" parent="12" name="car_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="49" parent="12" name="car_number">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="12" name="car_category">
+      <Position>3</Position>
+      <DataType>enum(&apos;Эконом-класс&apos;, &apos;Средний класс&apos;, &apos;Бизнес-класс&apos;)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="12" name="car_brand">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="12" name="car_staff">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="12" name="car_available">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <index id="54" parent="12" name="fk_Cars_Brands1_idx">
+      <ColNames>car_brand</ColNames>
+    </index>
+    <index id="55" parent="12" name="fk_Cars_Staff1_idx">
+      <ColNames>car_staff</ColNames>
+    </index>
+    <key id="56" parent="12" name="PRIMARY">
+      <ColNames>car_id
+car_brand
+car_staff</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="57" parent="12" name="fk_Cars_Brands1">
+      <ColNames>car_brand</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>brands</RefTableName>
+      <RefColNames>brand_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <foreign-key id="58" parent="12" name="fk_Cars_Staff1">
+      <ColNames>car_staff</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>staff</RefTableName>
+      <RefColNames>staff_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <column id="59" parent="13" name="client_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="60" parent="13" name="client_full_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="13" name="client_number_passport">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="13" name="client_number_license">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="13" name="client_location">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="13" name="client_number_phone">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="13" name="client_account">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="66" parent="13" name="fk_clients_users1_idx">
+      <ColNames>client_account</ColNames>
+    </index>
+    <key id="67" parent="13" name="PRIMARY">
+      <ColNames>client_id
+client_account</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="68" parent="13" name="fk_clients_users1">
+      <ColNames>client_account</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>user_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="69" parent="14" name="discount_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="70" parent="14" name="discount_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="14" name="discount_value">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="72" parent="14" name="PRIMARY">
+      <ColNames>discount_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="73" parent="15" name="maintenance_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="74" parent="15" name="maintenance_defect">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="15" name="maintenance_cost">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="15" name="maintenance_car">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="15" name="maintenance_staff">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="15" name="maintenance_date_begin">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="15" name="maintenance_date_expir">
+      <Position>7</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="80" parent="15" name="fk_Maintenances_Cars1_idx">
+      <ColNames>maintenance_car</ColNames>
+    </index>
+    <index id="81" parent="15" name="fk_Maintenances_Staff1_idx">
+      <ColNames>maintenance_staff</ColNames>
+    </index>
+    <key id="82" parent="15" name="PRIMARY">
+      <ColNames>maintenance_id
+maintenance_car
+maintenance_staff</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="83" parent="15" name="fk_Maintenances_Cars1">
+      <ColNames>maintenance_car</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>cars</RefTableName>
+      <RefColNames>car_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <foreign-key id="84" parent="15" name="fk_Maintenances_Staff1">
+      <ColNames>maintenance_staff</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>staff</RefTableName>
+      <RefColNames>staff_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <trigger id="85" parent="15" name="maintenances_BEFORE_INSERT">
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <trigger id="86" parent="15" name="maintenances_BEFORE_UPDATE">
+      <Turn>before-row</Turn>
+      <Events>U</Events>
+    </trigger>
+    <column id="87" parent="16" name="order_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="88" parent="16" name="order_client">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="89" parent="16" name="order_car">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="16" name="order_date_begin">
+      <Position>4</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="91" parent="16" name="order_date_expir">
+      <Position>5</Position>
+      <DataType>date|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="92" parent="16" name="fk_Orders_Cars1_idx">
+      <ColNames>order_car</ColNames>
+    </index>
+    <index id="93" parent="16" name="fk_Orders_Clients1_idx">
+      <ColNames>order_client</ColNames>
+    </index>
+    <key id="94" parent="16" name="PRIMARY">
+      <ColNames>order_id
+order_client
+order_car</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="95" parent="16" name="fk_Orders_Clients1">
+      <ColNames>order_client</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>clients</RefTableName>
+      <RefColNames>client_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <foreign-key id="96" parent="16" name="fk_Orders_Cars1">
+      <ColNames>order_car</ColNames>
+      <RefSchemaName>autorentalbase</RefSchemaName>
+      <RefTableName>cars</RefTableName>
+      <RefColNames>car_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>no-action</OnDelete>
+    </foreign-key>
+    <trigger id="97" parent="16" name="orders_BEFORE_INSERT">
+      <Turn>before-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <trigger id="98" parent="16" name="orders_BEFORE_UPDATE">
+      <Turn>before-row</Turn>
+      <Events>U</Events>
+    </trigger>
+    <trigger id="99" parent="16" name="orders_AFTER_INSERT">
+      <Turn>after-row</Turn>
+      <Events>I</Events>
+    </trigger>
+    <trigger id="100" parent="16" name="orders_AFTER_UPDATE">
+      <Turn>after-row</Turn>
+      <Events>U</Events>
+    </trigger>
+    <column id="101" parent="17" name="service_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="102" parent="17" name="service_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="103" parent="17" name="service_cost">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="104" parent="17" name="PRIMARY">
+      <ColNames>service_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="105" parent="18" name="staff_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="106" parent="18" name="staff_full_name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="107" parent="18" name="staff_post">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="108" parent="18" name="staff_salary">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="109" parent="18" name="PRIMARY">
+      <ColNames>staff_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="110" parent="19" name="user_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="111" parent="19" name="user_login">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="112" parent="19" name="user_password">
+      <Position>3</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="113" parent="19" name="user_role">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="114" parent="19" name="user_email">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="115" parent="19" name="PRIMARY">
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <argument id="116" parent="20" name="id">
+      <DataType>int(11)|0</DataType>
+    </argument>
+  </database-model>
+</dataSource>
