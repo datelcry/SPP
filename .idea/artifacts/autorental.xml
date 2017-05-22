@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="autorental">
+    <output-path>$PROJECT_DIR$/AutoRental/out/artifacts/AutoRental_war_exploded</output-path>
+    <root id="root" />
+  </artifact>
+</component>
